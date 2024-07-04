@@ -27,13 +27,18 @@ spec:
       stage('Build Maven'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: pipelineParams.git_url]]])
-                
+                mavenBuild()
             }
     }
       stage('Docker build') {
       steps {
         container(name: 'dind') {
-            mavenBuild()
+            sh '''
+            docker build -f src/main/docker/Dockerfile.jvm -t ex1 .
+            docker login 192.168.2.5:8082 -u=admin -p="$NEXUS_D"
+            docker tag ex1:latest 192.168.2.5:8082/repository/docker-images/ex1
+            docker push 192.168.2.5:8082/repository/docker-images/ex1
+          '''
         }
       }
     }

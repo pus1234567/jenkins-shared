@@ -25,7 +25,6 @@ spec:
       stage('Build Maven'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: pipelineParams.git_url]]])
-                mavenBuild()
             }
     }
   }

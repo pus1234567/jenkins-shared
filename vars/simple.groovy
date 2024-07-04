@@ -34,7 +34,7 @@ spec:
     stage('Docker build') {
       steps {
         container(name: 'dind') {
-            dockerBuildPush(name:${pipelineParams.name}, tag:${pipelineParams.tag} address:${pipelineParams.address}, repo:${pipelineParams.repo}, username:${pipelineParams.username}, pass:NEXUS_D)
+            dockerBuildPush(name:${pipelineParams.name}, tag:${pipelineParams.tag}, address:${pipelineParams.address}, repo:${pipelineParams.repo}, username:${pipelineParams.username}, pass:NEXUS_D)
         }
       }
     }

@@ -7,7 +7,7 @@ def call(body) {
 
     pipeline {
     environment {
-        NEXUS_D = credentials(pipelineParams.n_pass)
+        NEXUS_D = "credentials(pipelineParams.n_pass)"
     }
   agent {
     kubernetes {

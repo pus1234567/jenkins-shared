@@ -27,20 +27,9 @@ spec:
       stage('Build Maven'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: pipelineParams.git_url]]])
-                mavenBuild()
+                echo "${pipelineParams.repo}"
+                echo "${pipelineParams.address}"
             }
-    }
-      stage('Docker build') {
-      steps {
-        container(name: 'dind') {
-            sh """
-                    docker build -f src/main/docker/Dockerfile.jvm -t ${pipelineParams.name} .
-                    docker login ${pipelineParams.address} -u=${pipelineParams.username} -p=${NEXUS_D}
-                    docker tag ${pipelineParams.name}:${pipelineParams.tag} ${pipelineParams.repo}/${pipelineParams.name}
-                    docker push ${pipelineParams.repo}/${pipelineParams.name}
-                """
-        }
-      }
     }
   }
 }

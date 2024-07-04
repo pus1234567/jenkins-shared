@@ -35,7 +35,7 @@ spec:
         container(name: 'dind') {
             sh """
                     docker build -f src/main/docker/Dockerfile.jvm -t ${pipelineParams.name} .
-                    docker login ${pipelineParams.address} -u=${pipelineParams.username} -p=${pipelineParams.pass}
+                    docker login ${pipelineParams.address} -u=${pipelineParams.username} -p=${NEXUS_D}
                     docker tag ${pipelineParams.name}:${pipelineParams.tag} ${pipelineParams.repo}/${pipelineParams.name}
                     docker push ${pipelineParams.repo}/${pipelineParams.name}
                 """

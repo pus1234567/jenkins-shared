@@ -33,7 +33,7 @@ spec:
       stage('Docker build') {
       steps {
         container(name: 'dind') {
-            dockerBuildPush(name:"ex1", tag:"latest" address:"192.168.2.5:8082", repo:"192.168.2.5:8082/repository/docker-images", username:"admin", pass:NEXUS_D)
+            dockerBuildPush(name:"ex1", tag:"latest", address:"192.168.2.5:8082", repo:"192.168.2.5:8082/repository/docker-images", username:"admin", pass:NEXUS_D)
         }
       }
     }

@@ -4,8 +4,10 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-
     pipeline {
+        environment {
+        NEXUS_D = credentials('nexus-d')
+    }
   agent {
     kubernetes {
       yaml """
@@ -25,7 +27,6 @@ spec:
       stage('Build Maven'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: pipelineParams.git_url]]])
-                mavenBuild()
             }
     }
   }

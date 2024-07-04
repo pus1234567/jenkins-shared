@@ -24,7 +24,7 @@ spec:
   stages {
       stage('Build Maven'){
             steps{
-                echo "Hi"
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: https://github.com/pus1234567/ex1]]])
             }
     }
   }

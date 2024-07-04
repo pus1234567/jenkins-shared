@@ -33,12 +33,12 @@ spec:
       stage('Docker build') {
       steps {
         container(name: 'dind') {
-            sh '''
-            docker build -f src/main/docker/Dockerfile.jvm -t ex1 .
-            docker login 192.168.2.5:8082 -u=admin -p="$NEXUS_D"
-            docker tag ex1:latest 192.168.2.5:8082/repository/docker-images/ex1
-            docker push 192.168.2.5:8082/repository/docker-images/ex1
-          '''
+            sh """
+                    docker build -f src/main/docker/Dockerfile.jvm -t ${pipelineParams.name} .
+                    docker login ${pipelineParams.address} -u=${pipelineParams.username} -p=${pipelineParams.pass}
+                    docker tag ${pipelineParams.name}:${pipelineParams.tag} ${pipelineParams.repo}/${pipelineParams.name}
+                    docker push ${pipelineParams.repo}/${pipelineParams.name}
+                """
         }
       }
     }

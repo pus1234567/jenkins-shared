@@ -6,9 +6,6 @@ def call(body) {
     body()
 
     pipeline {
-    environment {
-        NEXUS_D = "credentials(pipelineParams.n_pass)"
-    }
   agent {
     kubernetes {
       yaml """

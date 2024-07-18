@@ -20,7 +20,6 @@ spec:
                         script {
                             for(p in config) {
                                 sh 'mkdir ${p.value}'
-                                dir(p.value)
                             }
                         }
                     }

@@ -19,7 +19,7 @@ spec:
                     container('dind1') {
                         script {
                             for(p in config) {
-                                sh 'mkdir ${p.value}'
+                                sh 'ls'
                             }
                         }
                     }

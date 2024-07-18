@@ -16,7 +16,7 @@ spec:
         stages {
             stage('Build and Push Agent Images') {
                 steps {
-                    container('dind') {
+                    container('dind1') {
                         script {
                             for(p in config) {
                                 sh 'mkdir ${p.value}'
